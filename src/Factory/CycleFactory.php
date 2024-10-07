@@ -19,6 +19,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Sirix\Cycle\Enum\SchemaProperty;
+use Sirix\Cycle\Service\MigratorWrapper;
 use Spiral\Tokenizer\ClassLocator;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Finder\Finder;
@@ -69,6 +70,7 @@ class CycleFactory
             $cache->deleteItem('schema');
         }
 
+        /** @var MigratorWrapper $migrator */
         $migrator = $container->get('migrator');
 
         $finder = new Finder();

@@ -10,7 +10,19 @@ use Throwable;
 
 class MigratorWrapper implements MigratorInterface
 {
-    public function __construct(private readonly Migrator $migrator) {}
+    public function __construct(
+        private readonly Migrator $migrator
+    ) {}
+
+    public function getRepository()
+    {
+        return $this->migrator->getRepository();
+    }
+
+    public function getConfig()
+    {
+        return $this->migrator->getConfig();
+    }
 
     public function isConfigured(): bool
     {
