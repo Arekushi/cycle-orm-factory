@@ -1,11 +1,11 @@
-# Mezzio Cycle ORM Factory
+# Mezzio Cycle ORM Factory Fork
 
-![GitHub license](https://img.shields.io/github/license/sirix777/cycle-orm-factory?style=flat-square)
+> This is a fork of the original repository: https://github.com/sirix777/cycle-orm-factory
 
 This package provides factories for integrating Cycle ORM into the Mezzio framework, providing seamless setup and configuration.
 ### Installation
 ```bash
-composer require sirix/cycle-orm-factory
+composer require arekushi/cycle-orm-factory
 ```
 
 ### Configuration
