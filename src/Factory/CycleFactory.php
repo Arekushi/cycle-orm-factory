@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Sirix\Cycle\Factory;
 
 use Cycle\Annotated;
+use Cycle\Annotated\Locator\TokenizerEmbeddingLocator;
+use Cycle\Annotated\Locator\TokenizerEntityLocator;
 use Cycle\ORM;
 use Cycle\ORM\Entity\Behavior\EventDrivenCommandGenerator;
 use Cycle\ORM\Exception\ConfigException;
@@ -69,13 +71,16 @@ class CycleFactory
 
         $migrator = $container->get('migrator');
 
-        $finder = (new Finder())->files()->in($entities);
-        $classLocator = new ClassLocator($finder);
+        $finder = new Finder();
+        $files = $finder->files()->in($entities);
+        $classLocator = new ClassLocator($files);
+        $embeddingLocator = new TokenizerEmbeddingLocator($classLocator);
+        $entityLocator = new TokenizerEntityLocator($classLocator);
 
         $generators = [
             new Schema\Generator\ResetTables(),
-            new Annotated\Embeddings($classLocator),
-            new Annotated\Entities($classLocator),
+            new Annotated\Embeddings($embeddingLocator),
+            new Annotated\Entities($entityLocator),
             new Annotated\TableInheritance(),
             new Annotated\MergeColumns(),
             new Schema\Generator\GenerateRelations(),
